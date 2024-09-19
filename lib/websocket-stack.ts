@@ -1,30 +1,14 @@
-// lib/api-stack.ts
+// lib/websocket-stack.ts
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 import * as apigwv2 from 'aws-cdk-lib/aws-apigatewayv2';
-import * as apigwv2integrations from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { LambdaStack } from './lambda-stack';
-import * as lambda from 'aws-cdk-lib/aws-lambda';
-import * as apigwv2cfn from 'aws-cdk-lib/aws-apigatewayv2';
 
 export class ApiStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: cdk.StackProps & { lambdaStack: LambdaStack }) {
     super(scope, id, props);
 
-    const { connectFunction, messageFunction, getLastMessagesLambda, getThreadsByGroupLambda, addUserFunction, addGroupFunction } = props.lambdaStack;
-
-    // Create HTTP API Gateway
-    const httpApi = new apigateway.RestApi(this, 'HttpApi', {
-      restApiName: 'HTTP API',
-      description: 'This service serves HTTP endpoints',
-    });
-
-    const userResource = httpApi.root.addResource('user');
-    userResource.addMethod('POST', new apigateway.LambdaIntegration(addUserFunction));
-
-    const groupResource = httpApi.root.addResource('group');
-    groupResource.addMethod('POST', new apigateway.LambdaIntegration(addGroupFunction));
+    const { connectFunction, messageFunction, getLastMessagesLambda, getThreadsByGroupLambda } = props.lambdaStack;
 
     // Create WebSocket API Gateway
     const webSocketApi = new apigwv2.CfnApi(this, 'WebSocketApi', {
