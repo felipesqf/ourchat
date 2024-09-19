@@ -1,32 +1,39 @@
-import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb';
+const AWS = require('aws-sdk');
+const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
-const client = new DynamoDBClient({});
+exports.handler = async (event: { body: string; }) => {
+  const { messageId, content, senderUserId, createdAt, groupId, threadId } = JSON.parse(event.body);
 
-export const handler = async (event: any) => {
-  console.log('Event:', JSON.stringify(event));
-
-  const { connectionId, message } = JSON.parse(event.body);
+  if (!messageId || !content || !senderUserId || !createdAt || !groupId || !threadId) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'Missing required parameters' }),
+    };
+  }
 
   const params = {
-    TableName: process.env.MESSAGES_TABLE_NAME!,
+    TableName: process.env.MESSAGES_TABLE_NAME,
     Item: {
-      messageId: { S: connectionId },
-      timestamp: { S: new Date().toISOString() },
-      content: { S: message },
+      messageId,
+      content,
+      senderUserId,
+      createdAt,
+      GSI1PK: groupId, // Primary key for the GSI
+      GSI1SK: threadId, // Sort key for the GSI
     },
   };
 
   try {
-    await client.send(new PutItemCommand(params));
+    await dynamoDB.put(params).promise();
     return {
       statusCode: 200,
-      body: JSON.stringify({ success: true }),
+      body: JSON.stringify({ message: 'Message stored successfully' }),
     };
-    } catch (err) {
-        // treat errors t
-        return {
-        statusCode: 500,
-        body: JSON.stringify(err),
+  } catch (error) {
+    console.error('Error storing message:', error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: 'Error storing message' }),
     };
   }
 };
