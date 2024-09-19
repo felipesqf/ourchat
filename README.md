@@ -10,7 +10,6 @@ This archtecture will create:<br>
 - KMS keys for Dynamo DB
 
 
-
 ## Archtecture
 ![screenshot1](https://github.com/felipesqf/ourchat/blob/main/hld.png) 
 
@@ -20,14 +19,14 @@ This archtecture will create:<br>
 - AWS Access and Secret key
 
 
-## Authentication
-The authentication to the AWS account will happening using the AWS Access and SEcret key, which will need to be exported prior to the execution.
-
-
-## Test
+## Testing
 - npm run build compile typescript to js
 - npm run watch watch for changes and compile
 - npm run test perform the jest unit tests
+
+
+## Authentication
+The authentication to the AWS account will happening using the AWS Access and SEcret key, which will need to be exported prior to the execution.
 
 
 ## Execution
