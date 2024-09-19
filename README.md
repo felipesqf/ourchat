@@ -24,11 +24,13 @@ This archtecture will create:<br>
 The authentication to the AWS account will happening using the AWS Access and SEcret key, which will need to be exported prior to the execution.
 
 
-## Execution
+## Test
 - npm run build compile typescript to js
 - npm run watch watch for changes and compile
 - npm run test perform the jest unit tests
 
+
+## Execution
 - export AWS_ACCESS_KEY_ID=xxxxxxxxxxxxxxx
 - export AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxxx
 - export AWS_DEFAULT_REGION=ap-southeast-2
