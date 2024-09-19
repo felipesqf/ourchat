@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
-exports.handler = async (event: { body: string; }) => {
+export const handler = async (event: { body: string; }) => {
   const { messageId, content, senderUserId, createdAt, groupId, threadId } = JSON.parse(event.body);
 
   if (!messageId || !content || !senderUserId || !createdAt || !groupId || !threadId) {
