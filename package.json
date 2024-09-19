@@ -22,7 +22,8 @@
   "dependencies": {
     "@aws-cdk/aws-wafv2": "^1.203.0",
     "@aws-cdk/core": "^1.203.0",
-    "@aws-sdk/client-dynamodb": "^3.651.1",
+    "@aws-sdk/client-dynamodb": "^3.654.0",
+    "@aws-sdk/lib-dynamodb": "^3.654.0",
     "aws-cdk-lib": "^2.158.0",
     "constructs": "^10.3.0"
   }

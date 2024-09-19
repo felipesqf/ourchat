@@ -12,19 +12,18 @@ export class DynamoDBStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // Create User Table
-    this.userTable = new dynamodb.Table(this, 'UserTable', {
-      partitionKey: { name: 'userId', type: dynamodb.AttributeType.STRING },
-      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-      contributorInsightsEnabled: true,
-      encryption: dynamodb.TableEncryption.AWS_MANAGED,
-    //   readCapacity: 5,
-    //   writeCapacity: 5,
-    });
-
     // Create Group Table
     this.groupTable = new dynamodb.Table(this, 'GroupTable', {
       partitionKey: { name: 'groupId', type: dynamodb.AttributeType.STRING },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      contributorInsightsEnabled: true,
+      encryption: dynamodb.TableEncryption.AWS_MANAGED,
+    });
+
+    // Create User Table
+    this.userTable = new dynamodb.Table(this, 'UserTable', {
+      tableName: 'User',
+      partitionKey: { name: 'userId', type: dynamodb.AttributeType.STRING },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
       contributorInsightsEnabled: true,
       encryption: dynamodb.TableEncryption.AWS_MANAGED,
