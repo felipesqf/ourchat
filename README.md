@@ -12,7 +12,7 @@ This archtecture will create:<br>
 
 
 ## Archtecture
-![screenshot1](https://lib/assets/hld.png/blob/main/React-Node_new.png) 
+![screenshot1](https://github.com/felipesqf/ourchat/blob/main/hld.png) 
 
 
 ## Requirements
