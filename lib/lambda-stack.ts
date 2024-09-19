@@ -23,7 +23,7 @@ export class LambdaStack extends cdk.Stack {
     this.connectFunction = new lambda.Function(this, 'ConnectFunction', {
       runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
-      code: lambda.Code.fromAsset(path.join(__dirname, './functions/connect')),
+      code: lambda.Code.fromAsset(path.join(__dirname, '../functions/connect')), 
       environment: {
         MESSAGES_TABLE_NAME: messageTable.tableName,
       },
@@ -34,7 +34,7 @@ export class LambdaStack extends cdk.Stack {
     this.messageFunction = new lambda.Function(this, 'MessageFunction', {
       runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
-      code: lambda.Code.fromAsset(path.join(__dirname, './functions/messages')),
+      code: lambda.Code.fromAsset(path.join(__dirname, '../functions/messages')),
       environment: {
         MESSAGES_TABLE_NAME: messageTable.tableName,
       },
@@ -44,7 +44,7 @@ export class LambdaStack extends cdk.Stack {
     this.getLastMessagesLambda = new lambda.Function(this, 'GetLastMessagesFunction', {
       runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
-      code: lambda.Code.fromAsset(path.join(__dirname, './functions/lastMessages')),
+      code: lambda.Code.fromAsset(path.join(__dirname, '../functions/lastMessages')),
       environment: {
         MESSAGE_TABLE_NAME: messageTable.tableName,
       },
@@ -55,7 +55,7 @@ export class LambdaStack extends cdk.Stack {
     this.getThreadsByGroupLambda = new lambda.Function(this, 'GetThreadsByGroupFunction', {
       runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
-      code: lambda.Code.fromAsset(path.join(__dirname, './functions/thread')),
+      code: lambda.Code.fromAsset(path.join(__dirname, '../functions/thread')),
       environment: {
         THREAD_TABLE_NAME: threadTable.tableName,
         GROUP_TABLE_NAME: groupTable.tableName,
@@ -66,7 +66,7 @@ export class LambdaStack extends cdk.Stack {
     // Lambda function for User
     this.addUserFunction = new lambda.Function(this, 'addUserFunction', {
       runtime: lambda.Runtime.NODEJS_18_X,
-      code: lambda.Code.fromAsset('./functions/user'),
+      code: lambda.Code.fromAsset(path.join(__dirname, '../functions/user')),
       handler: 'index.handler',
       environment: {
         USER_TABLE_NAME: userTable.tableName,
@@ -76,7 +76,7 @@ export class LambdaStack extends cdk.Stack {
     // Lambda function for Group
     this.addGroupFunction = new lambda.Function(this, 'addGroupFunction', {
       runtime: lambda.Runtime.NODEJS_18_X,
-      code: lambda.Code.fromAsset('./functions/group'),
+      code: lambda.Code.fromAsset(path.join(__dirname, '../functions/group')),
       handler: 'index.handler',
       environment: {
         GROUP_TABLE_NAME: groupTable.tableName,
